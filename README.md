@@ -7,7 +7,7 @@
 1b. create the (temp) directories needed for the next steps:
 
 ```
-mkdir outputs witnesses ceremonies keys verifiers proofs
+mkdir outputs witnesses ceremonies keys verifiers proofs contracts
 ```
 
 ## compilation & proof generation
