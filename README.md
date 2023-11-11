@@ -15,13 +15,13 @@ mkdir outputs witnesses ceremonies keys verifiers proofs contracts
 2. generate the `.wasm` file needed to calculate the witness, and the `.r1cs` file with the circuit's constraints:
 
 ```
-circom multiplier2.circom --wasm --r1cs -o outputs/
+circom circuit.circom --wasm --r1cs -o outputs/
 ```
 
-3. calculate the witness using the input from `inputs/multiplier2.json`:
+3. calculate the witness using the input from `inputs/circuit.json`:
 
 ```
-node outputs/multiplier2_js/generate_witness.js outputs/multiplier2_js/multiplier2.wasm inputs/multiplier2.json witnesses/multiplier2.wtns
+node outputs/circuit_js/generate_witness.js outputs/circuit_js/circuit.wasm inputs/circuit.json witnesses/circuit.wtns
 ```
 
 4. start ceremony:
@@ -45,25 +45,25 @@ snarkjs powersoftau prepare phase2 ceremonies/pot12_0001.ptau ceremonies/pot12_f
 7. generate `.zkey` file:
 
 ```
-snarkjs groth16 setup outputs/multiplier2.r1cs ceremonies/pot12_final.ptau keys/multiplier2_0000.zkey
+snarkjs groth16 setup outputs/circuit.r1cs ceremonies/pot12_final.ptau keys/circuit_0000.zkey
 ```
 
 8. contribute to phase 2:
 
 ```
-snarkjs zkey contribute keys/multiplier2_0000.zkey keys/multiplier2_0001.zkey --name="1st Contributor Name" -v
+snarkjs zkey contribute keys/circuit_0000.zkey keys/circuit_0001.zkey --name="1st Contributor Name" -v
 ```
 
 9. export the verification key:
 
 ```
-snarkjs zkey export verificationkey keys/multiplier2_0001.zkey verifiers/verification_key.json
+snarkjs zkey export verificationkey keys/circuit_0001.zkey verifiers/verification_key.json
 ```
 
 10. generate proof:
 
 ```
-snarkjs groth16 prove keys/multiplier2_0001.zkey witnesses/multiplier2.wtns proofs/multiplier2.json proofs/multiplier2_public.json
+snarkjs groth16 prove keys/circuit_0001.zkey witnesses/circuit.wtns proofs/circuit.json proofs/circuit_public.json
 ```
 
 ## verification
@@ -71,7 +71,7 @@ snarkjs groth16 prove keys/multiplier2_0001.zkey witnesses/multiplier2.wtns proo
 11. verify the proof:
 
 ```
-snarkjs groth16 verify verifiers/verification_key.json proofs/multiplier2_public.json proofs/multiplier2.json
+snarkjs groth16 verify verifiers/verification_key.json proofs/circuit_public.json proofs/circuit.json
 ```
 
 should show the follwing output:
@@ -85,5 +85,5 @@ should show the follwing output:
 generate a deployable solidity contract that can verify a proof:
 
 ```
-snarkjs zkey export solidityverifier keys/multiplier2_0001.zkey contracts/multiplier2_verifier.sol
+snarkjs zkey export solidityverifier keys/circuit_0001.zkey contracts/circuit_verifier.sol
 ```

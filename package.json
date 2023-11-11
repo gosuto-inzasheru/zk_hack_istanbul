@@ -3,10 +3,10 @@
   "license": "MIT",
   "scripts": {
     "prepare": "mkdir -p outputs witnesses ceremonies keys verifiers proofs contracts",
-    "witness": "circom multiplier2.circom --wasm --r1cs -o outputs/ && node outputs/multiplier2_js/generate_witness.js outputs/multiplier2_js/multiplier2.wasm inputs/multiplier2.json witnesses/multiplier2.wtns",
-    "ceremony": "snarkjs powersoftau new bn128 12 ceremonies/pot12_0000.ptau -v && snarkjs powersoftau contribute ceremonies/pot12_0000.ptau ceremonies/pot12_0001.ptau --name=\"First contribution\" -v && snarkjs powersoftau prepare phase2 ceremonies/pot12_0001.ptau ceremonies/pot12_final.ptau -v && snarkjs groth16 setup outputs/multiplier2.r1cs ceremonies/pot12_final.ptau keys/multiplier2_0000.zkey && snarkjs zkey contribute keys/multiplier2_0000.zkey keys/multiplier2_0001.zkey --name=\"1st Contributor Name\" -v && snarkjs zkey export verificationkey keys/multiplier2_0001.zkey verifiers/verification_key.json && snarkjs groth16 prove keys/multiplier2_0001.zkey witnesses/multiplier2.wtns proofs/multiplier2.json proofs/multiplier2_public.json",
-    "verify": "snarkjs groth16 verify verifiers/verification_key.json proofs/multiplier2_public.json proofs/multiplier2.json",
-    "solidity": "snarkjs zkey export solidityverifier keys/multiplier2_0001.zkey contracts/multiplier2_verifier.sol",
+    "witness": "circom circuit.circom --wasm --r1cs -o outputs/ && node outputs/circuit_js/generate_witness.js outputs/circuit_js/circuit.wasm inputs/circuit.json witnesses/circuit.wtns",
+    "ceremony": "snarkjs powersoftau new bn128 12 ceremonies/pot12_0000.ptau -v && snarkjs powersoftau contribute ceremonies/pot12_0000.ptau ceremonies/pot12_0001.ptau --name=\"First contribution\" -v && snarkjs powersoftau prepare phase2 ceremonies/pot12_0001.ptau ceremonies/pot12_final.ptau -v && snarkjs groth16 setup outputs/circuit.r1cs ceremonies/pot12_final.ptau keys/circuit_0000.zkey && snarkjs zkey contribute keys/circuit_0000.zkey keys/circuit_0001.zkey --name=\"1st Contributor Name\" -v && snarkjs zkey export verificationkey keys/circuit_0001.zkey verifiers/verification_key.json && snarkjs groth16 prove keys/circuit_0001.zkey witnesses/circuit.wtns proofs/circuit.json proofs/circuit_public.json",
+    "verify": "snarkjs groth16 verify verifiers/verification_key.json proofs/circuit_public.json proofs/circuit.json",
+    "solidity": "snarkjs zkey export solidityverifier keys/circuit_0001.zkey contracts/circuit_verifier.sol",
     "all": "yarn run prepare && yarn run witness && yarn run ceremony && yarn run verify && yarn run solidity"
   }
 }
