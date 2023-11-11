@@ -82,6 +82,8 @@ should show the follwing output:
 
 ## (optional) solidity
 
+generate a deployable solidity contract that can verify a proof:
+
 ```
 snarkjs zkey export solidityverifier keys/multiplier2_0001.zkey contracts/multiplier2_verifier.sol
 ```
