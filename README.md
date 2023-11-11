@@ -1,5 +1,19 @@
 # zk_hack_istanbul
 
+## quickstart
+
+all commands mentioned below have been added the [`package.json`](./package.json)'s scripts section, making them easily accessible:
+
+```
+yarn run verify
+```
+
+or
+
+```
+yarn run all
+```
+
 ## installation
 
 1a. if not installed yet, follow the installation instructions for `rustup`, `circom` and `snarkjs` here: https://docs.circom.io/getting-started/installation/
