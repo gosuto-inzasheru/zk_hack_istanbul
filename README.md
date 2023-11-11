@@ -2,9 +2,9 @@
 
 ## installation
 
-1. if not installed yet, follow the installation instructions for `rustup`, `circom` and `snarkjs` here: https://docs.circom.io/getting-started/installation/
+1a. if not installed yet, follow the installation instructions for `rustup`, `circom` and `snarkjs` here: https://docs.circom.io/getting-started/installation/
 
-(optional)
+1b. create the (temp) directories needed for the next steps:
 
 ```
 mkdir outputs witnesses ceremonies keys verifiers proofs
@@ -63,7 +63,7 @@ snarkjs zkey export verificationkey keys/multiplier2_0001.zkey verifiers/verific
 10. generate proof:
 
 ```
-snarkjs groth16 prove keys/multiplier2_0001.zkey witnesses/multiplier2.wtns proof/multiplier2.json proof/multiplier2_public.json
+snarkjs groth16 prove keys/multiplier2_0001.zkey witnesses/multiplier2.wtns proofs/multiplier2.json proofs/multiplier2_public.json
 ```
 
 ## verification
@@ -78,4 +78,10 @@ should show the follwing output:
 
 ```
 [INFO]  snarkJS: OK!
+```
+
+## (optional) solidity
+
+```
+snarkjs zkey export solidityverifier keys/multiplier2_0001.zkey contracts/multiplier2_verifier.sol
 ```
